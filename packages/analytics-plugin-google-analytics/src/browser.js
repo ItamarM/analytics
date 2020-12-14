@@ -223,6 +223,9 @@ function googleAnalytics(pluginConfig = {}) {
     identify: ({ payload, config }) => {
       identifyVisitor(payload.userId, payload.traits, config)
     },
+    require: ({ payload, config }) => {
+      requirePlugin(payload.name, payload.options, config)
+    },
     loaded: () => {
       return !!window.gaplugins
     }
