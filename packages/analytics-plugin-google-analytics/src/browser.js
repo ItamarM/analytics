@@ -399,7 +399,9 @@ export function requirePlugin(pluginName, pluginOptions, conf = {}) {
   if (pluginName.replace(/^\s+|\s+$/g, '') === '') {
     throw new Error('Plugin name cannot be an empty string in .require()')
   }
+
   const requireString = instancePrefix ? `${instancePrefix}.require` : 'require'
+
   // Optional Fields
   if (pluginOptions) {
     if (typeof pluginOptions !== 'object') {
@@ -408,7 +410,7 @@ export function requirePlugin(pluginName, pluginOptions, conf = {}) {
 
     ga(requireString, pluginName, pluginOptions)
   } else {
-    ga(requireString, pluginName);
+    ga(requireString, pluginName)
   }
 }
 
