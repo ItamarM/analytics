@@ -519,6 +519,20 @@ const analytics = Analytics({
 
 If using a proxied endpoint, it is recommended to combine this technique with the [do-not-track](https://getanalytics.io/plugins/do-not-track/) plugin to ensure website visitors privacy.
 
+## Using Plugins
+
+[Plugins](https://developers.google.com/analytics/devguides/collection/analyticsjs/using-plugins) are scripts that enhance the functionality of google analytics to aid in measuring user interaction.
+
+> At the moment only the browser implementation supports external plugins.
+
+The `require` command takes the name of a plugin and registers it for use with the `ga()` command queue. If the plugin accepts configuration options, those options can be passed as the final argument to the `require` command.
+
+```js
+analytics.require('displayfeatures', {
+  cookieName: 'display_features_cookie'
+})
+```
+
 ## Electron Apps & Browser Extensions
 
 Electron apps bundle and serve their code from the `file://` extension. Likewise, browser extensions serve files from `chrome-extension://`. This causes issues like [this](https://github.com/DavidWells/analytics/issues/77) & [this](https://github.com/DavidWells/analytics/issues/72#issuecomment-681320271) with Google Analytics.

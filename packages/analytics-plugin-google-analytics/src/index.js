@@ -13,10 +13,12 @@ const initialize = process.browser ? browser.initialize : server.initialize
 const page = process.browser ? browser.pageView : server.pageView
 const track = process.browser ? browser.trackEvent : server.trackEvent
 const identify = process.browser ? browser.identifyVisitor : server.identifyVisitor
+const require = process.browser ? browser.requirePlugin : server.requirePlugin
 
 export {
   identify,
   track,
   page,
-  initialize
+  initialize,
+  require
 }

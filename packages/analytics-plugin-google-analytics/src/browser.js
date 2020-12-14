@@ -382,6 +382,36 @@ export function identifyVisitor(id, traits = {}, conf = {}) {
   }
 }
 
+/**
+ * Require and use GA plugins
+ * @param {string} pluginName e.g. 'ecommerce' or 'myplugin'
+ * @param {Object} pluginOptions optional e.g {path: '/log', debug: true}
+ */
+export function requirePlugin(pluginName, pluginOptions, conf = {}) {
+  if (gaNotLoaded()) return
+  const { instancePrefix } = getInstanceDetails(conf)
+
+  // Required Fields
+  if (!pluginName) {
+    throw new Error('Plugin name is required in .require()')
+  }
+
+  if (pluginName.replace(/^\s+|\s+$/g, '') === '') {
+    throw new Error('Plugin name cannot be an empty string in .require()')
+  }
+  const requireString = instancePrefix ? `${instancePrefix}.require` : 'require'
+  // Optional Fields
+  if (pluginOptions) {
+    if (typeof pluginOptions !== 'object') {
+      throw new Error('Plugin options expected to be an object')
+    }
+
+    ga(requireString, pluginName, pluginOptions)
+  } else {
+    ga(requireString, pluginName);
+  }
+}
+
 function scriptLoaded(scriptSrc) {
   const scripts = document.querySelectorAll('script[src]')
   return !!Object.keys(scripts).filter((key) => (scripts[key].src || '') === scriptSrc).length

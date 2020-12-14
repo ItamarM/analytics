@@ -73,7 +73,9 @@ function googleAnalytics(pluginConfig = {}) {
       }, client, customDimensions)
     },
     /* identify user */
-    identify: ({ payload }) => identifyVisitor(payload.userId, client)
+    identify: ({ payload }) => identifyVisitor(payload.userId, client),
+    /* require a plugin */
+    require: () => requirePlugin(),
   }
 }
 
@@ -106,6 +108,14 @@ export function trackEvent({ category, event, label, value, properties }, client
  */
 export function identifyVisitor(id, client) {
   client.set('uid', id)
+}
+
+/**
+ * Require and use GA plugins
+ */
+export function requirePlugin() {
+  // Not supported at the moment
+  return;
 }
 
 // Prep Custom Dimensions to be Reported.
